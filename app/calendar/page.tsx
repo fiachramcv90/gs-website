@@ -22,7 +22,7 @@ const months = [
   { irish: "Nollaig", english: "December", number: 11 },
 ]
 
-const sampleEvents = {
+const sampleEvents: { [key: string]: { title: string; time: string; type: string; }[] } = {
   "2024-11-20": [
     {
       title: "Geal sa Gheimhreadh / Ditch the Dark",
