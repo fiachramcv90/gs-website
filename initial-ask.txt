@@ -1,0 +1,41 @@
+Home Screen:
+	•	Similar to St Comgall’s (https://stcomgalls.co.uk/), but with a bilingual navigation bar (Irish on top, English below). I will provide the names in both languages.
+	•	Header: ‘Fáilte go Gaelscoil na bhFál’
+Navigation Bar:
+	1	Baile / Home
+	◦	Sections: ‘Fáilte/Welcome’ and ‘Fís/Vision’
+	2	Ár Ranganna / Our Classes
+	◦	Classes: Naí-Aonad, Rang 1, Rang 2, Rang 3, Rang 4, Rang 5, Rang 6, Rang 7
+	◦	Each class should include:
+	▪	Rudaí tábhachtacha/Important things to remember
+	▪	Téamaí na dTéarmaí/Term Themes
+	▪	Suíomhanna Úsáideacha/Websites That May Be Useful
+	▪	Foireann/Staff
+	3	Scoileanna Sínte / Extended Schools
+	◦	Cumann Bricfeasta/Breakfast Club
+	◦	Peil/Football
+	◦	Cumann Ealaíne/Art Club
+	◦	Cumann TFC/ICT Club
+	◦	Cumann Mata/Maths Club
+	◦	Ionad Uíbh Eachach
+	4	Imeachtaí / Events
+	5	Féilire / Calendar
+	◦	Months listed, clickable to open events. The current month should open automatically and be editable.
+	6	Nuacht is Déanaí / Latest News
+	◦	Dráma na Nollag/Christmas Play
+	◦	Geal sa Gheimhreadh/Ditch the Dark
+	◦	Lá na Stocaí Corra/Odd Socks Day
+	◦	Iontas an Gheimhridh/Winter Wonderland
+	7	Comhairle Scoile / School Council
+	◦	Cé muid/Who we are
+	◦	Obair/Work
+	◦	Spriocanna Gearrthéarmacha/Short-term Goals
+	◦	Spriocanna Fadtéarmacha/Long-term Goals
+	8	Virtual Office
+	◦	Same options as St Comgall’s (https://stcomgalls.co.uk/), except remove:
+	▪	Parents info sheets
+	▪	Prospectus
+	▪	Breakfast club
+	▪	Transport
+	▪	Waiting room
+	9	Teagmháil / Contact

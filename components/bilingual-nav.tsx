@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,7 +11,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react"
 
 const navigationItems = [
   {
@@ -91,9 +91,61 @@ const navigationItems = [
 
 export function BilingualNav() {
   const [isOpen, setIsOpen] = useState(false)
+  const [expandedMenus, setExpandedMenus] = useState<Record<number, boolean>>({})
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+        setExpandedMenus({})
+      }
+    }
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      // Focus management - focus first menu item when opened
+      const firstMenuItem = mobileMenuRef.current?.querySelector('a')
+      firstMenuItem?.focus()
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
+
+  // Close menu when clicking outside (but not on the button itself)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node
+      const navContainer = document.getElementById('mobile-navigation')
+      const menuButton = document.querySelector('[aria-controls="mobile-navigation"]')
+      
+      if (navContainer && !navContainer.contains(target) && !menuButton?.contains(target)) {
+        setIsOpen(false)
+        setExpandedMenus({})
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  const toggleSubmenu = (index: number) => {
+    setExpandedMenus(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }))
+  }
 
   return (
-    <nav className="bg-primary text-primary-foreground shadow-lg">
+    <nav className="bg-primary text-primary-foreground shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -163,49 +215,106 @@ export function BilingualNav() {
           <div className="lg:hidden">
             <Button
               variant="ghost"
-              size="sm"
+              size="lg"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-primary-foreground hover:bg-primary-foreground/10"
+              className="text-primary-foreground hover:bg-primary-foreground/10 p-3 min-h-[44px] min-w-[44px]"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-primary/95 backdrop-blur-sm">
-              {navigationItems.map((item, index) => (
-                <div key={index}>
-                  <Link
-                    href={item.href}
-                    className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-primary-foreground/10 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div>{item.irish}</div>
-                    <div className="text-xs opacity-80">{item.english}</div>
-                  </Link>
-                  {item.subItems && (
-                    <div className="ml-4 space-y-1">
+        <div 
+          className={`lg:hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-[calc(100vh-4rem)] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 overflow-hidden'
+          }`}
+          id="mobile-navigation"
+          ref={mobileMenuRef}
+          role="navigation"
+          aria-label="Mobile navigation menu"
+        >
+          <div className="px-2 pt-2 pb-4 space-y-2 bg-primary/95 backdrop-blur-sm border-t border-primary-foreground/10">
+            {navigationItems.map((item, index) => (
+              <div key={index} className="space-y-1">
+                {item.subItems ? (
+                  // Menu item with submenu
+                  <div>
+                    <button
+                      onClick={() => toggleSubmenu(index)}
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium hover:bg-primary-foreground/10 focus:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary-foreground/20 transition-all duration-200 min-h-[44px]"
+                      aria-expanded={expandedMenus[index] || false}
+                      aria-controls={`submenu-${index}`}
+                    >
+                      <div className="text-left">
+                        <div className="text-primary-foreground">{item.irish}</div>
+                        <div className="text-xs text-primary-foreground/80">{item.english}</div>
+                      </div>
+                      <div className="flex-shrink-0 ml-2">
+                        {expandedMenus[index] ? (
+                          <ChevronUp className="h-4 w-4 text-primary-foreground/80" aria-hidden="true" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4 text-primary-foreground/80" aria-hidden="true" />
+                        )}
+                      </div>
+                    </button>
+                    
+                    {/* Submenu with smooth animation */}
+                    <div 
+                      id={`submenu-${index}`}
+                      className={`ml-4 space-y-1 transition-all duration-300 ease-in-out overflow-hidden ${
+                        expandedMenus[index] ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                      }`}
+                      role="menu"
+                      aria-label={`${item.irish} submenu`}
+                    >
                       {item.subItems.map((subItem, subIndex) => (
                         <Link
                           key={subIndex}
                           href={subItem.href}
-                          className="block px-3 py-1 rounded-md text-xs hover:bg-primary-foreground/10 transition-colors"
-                          onClick={() => setIsOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm hover:bg-primary-foreground/10 focus:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary-foreground/20 transition-all duration-200 min-h-[44px] flex items-center"
+                          onClick={() => {
+                            setIsOpen(false)
+                            setExpandedMenus({})
+                          }}
+                          role="menuitem"
                         >
-                          <div>{subItem.irish}</div>
-                          <div className="opacity-70">{subItem.english}</div>
+                          <div>
+                            <div className="text-primary-foreground">{subItem.irish}</div>
+                            <div className="text-xs text-primary-foreground/70">{subItem.english}</div>
+                          </div>
                         </Link>
                       ))}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                  </div>
+                ) : (
+                  // Regular menu item
+                  <Link
+                    href={item.href}
+                    className="block px-4 py-3 rounded-lg text-sm font-medium hover:bg-primary-foreground/10 focus:bg-primary-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary-foreground/20 transition-all duration-200 min-h-[44px] flex items-center"
+                    onClick={() => {
+                      setIsOpen(false)
+                      setExpandedMenus({})
+                    }}
+                    role="menuitem"
+                  >
+                    <div>
+                      <div className="text-primary-foreground">{item.irish}</div>
+                      <div className="text-xs text-primary-foreground/80">{item.english}</div>
+                    </div>
+                  </Link>
+                )}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </nav>
   )
