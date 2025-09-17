@@ -109,7 +109,7 @@ export default function CalendarPage() {
   const emptyDays = Array.from({ length: firstDay }, (_, i) => i)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
       <BilingualNav />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

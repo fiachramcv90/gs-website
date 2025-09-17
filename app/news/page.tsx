@@ -45,14 +45,14 @@ const newsArticles = [
 
 export default function NewsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
       <BilingualNav />
       
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-emerald-800 mb-4">Nuacht na Scoile / School News</h1>
-          <p className="text-lg text-emerald-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-primary mb-4">Nuacht na Scoile / School News</h1>
+          <p className="text-lg text-primary/80 max-w-2xl mx-auto">
             Coinnigh suas le dáta leis na scéalta is déanaí ón scoil / Stay up to date with the latest stories from our
             school
           </p>
@@ -60,7 +60,7 @@ export default function NewsPage() {
 
         {/* Featured Article */}
         <div className="mb-12">
-          <Card className="overflow-hidden border-emerald-200 shadow-lg">
+          <Card className="overflow-hidden border-border shadow-lg">
             <div className="md:flex">
               <div className="md:w-1/2">
                 <img
@@ -70,11 +70,11 @@ export default function NewsPage() {
                 />
               </div>
               <div className="md:w-1/2 p-6">
-                <Badge className="bg-emerald-100 text-emerald-800 mb-3">
+                <Badge className="bg-muted text-primary mb-3">
                   {newsArticles[0].category} / {newsArticles[0].categoryEn}
                 </Badge>
-                <h2 className="text-2xl font-bold text-emerald-800 mb-3">{newsArticles[0].title}</h2>
-                <h3 className="text-xl text-emerald-600 mb-4">{newsArticles[0].titleEn}</h3>
+                <h2 className="text-2xl font-bold text-primary mb-3">{newsArticles[0].title}</h2>
+                <h3 className="text-xl text-primary/80 mb-4">{newsArticles[0].titleEn}</h3>
                 <p className="text-gray-600 mb-4">{newsArticles[0].excerpt}</p>
                 <p className="text-gray-500 mb-4">{newsArticles[0].excerptEn}</p>
                 <div className="flex items-center justify-between">
@@ -86,7 +86,7 @@ export default function NewsPage() {
                   </div>
                   <Link
                     href={`/news/${newsArticles[0].id}`}
-                    className="flex items-center text-emerald-600 hover:text-emerald-800 font-medium"
+                    className="flex items-center text-primary/80 hover:text-primary font-medium"
                   >
                     Léigh Tuilleadh / Read More
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -100,14 +100,14 @@ export default function NewsPage() {
         {/* Recent Articles Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {newsArticles.slice(1).map((article) => (
-            <Card key={article.id} className="overflow-hidden border-emerald-200 hover:shadow-lg transition-shadow">
+            <Card key={article.id} className="overflow-hidden border-border hover:shadow-lg transition-shadow">
               <img src={article.image || "/placeholder.svg"} alt={article.title} className="w-full h-48 object-cover" />
               <CardHeader>
-                <Badge className="bg-emerald-100 text-emerald-800 w-fit mb-2">
+                <Badge className="bg-muted text-primary w-fit mb-2">
                   {article.category} / {article.categoryEn}
                 </Badge>
-                <CardTitle className="text-emerald-800 text-lg">{article.title}</CardTitle>
-                <p className="text-emerald-600 font-medium">{article.titleEn}</p>
+                <CardTitle className="text-primary text-lg">{article.title}</CardTitle>
+                <p className="text-primary/80 font-medium">{article.titleEn}</p>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 text-sm mb-2">{article.excerpt}</p>
@@ -117,7 +117,7 @@ export default function NewsPage() {
                     <Calendar className="w-4 h-4 mr-1" />
                     {article.date}
                   </div>
-                  <Link href={`/news/${article.id}`} className="text-emerald-600 hover:text-emerald-800 font-medium">
+                  <Link href={`/news/${article.id}`} className="text-primary/80 hover:text-primary font-medium">
                     Léigh / Read
                   </Link>
                 </div>
@@ -128,10 +128,10 @@ export default function NewsPage() {
 
         {/* Newsletter Signup */}
         <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto border-emerald-200">
+          <Card className="max-w-2xl mx-auto border-border">
             <CardHeader>
-              <CardTitle className="text-emerald-800">Liostáil Nuachta / Newsletter</CardTitle>
-              <p className="text-emerald-600">
+              <CardTitle className="text-primary">Liostáil Nuachta / Newsletter</CardTitle>
+              <p className="text-primary/80">
                 Faigh na nuachtáin is déanaí díreach chuig do ríomhphost / Get the latest news directly to your email
               </p>
             </CardHeader>
@@ -140,9 +140,9 @@ export default function NewsPage() {
                 <input
                   type="email"
                   placeholder="Do sheoladh ríomhphoist / Your email"
-                  className="flex-1 px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="flex-1 px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-                <button className="px-6 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors">
+                <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
                   Cláraigh / Subscribe
                 </button>
               </div>
