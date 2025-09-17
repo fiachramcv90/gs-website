@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageSquare, Calendar } from "lucide-react"
+import { BilingualNav } from "@/components/bilingual-nav"
 
 const councilMembers = [
   {
@@ -58,45 +59,46 @@ const initiatives = [
 
 export default function SchoolCouncilPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
+      <BilingualNav />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-emerald-800 mb-4">Comhairle na Scoile / School Council</h1>
-          <p className="text-lg text-emerald-600 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold text-primary mb-4">Comhairle na Scoile / School Council</h1>
+          <p className="text-lg text-primary/80 max-w-3xl mx-auto">
             Tugann ár gComhairle Scoile guth do na daltaí agus cabhrann siad le cinntí tábhachtacha a dhéanamh. / Our
             School Council gives students a voice and helps make important decisions.
           </p>
         </div>
 
         {/* Mission Statement */}
-        <Card className="mb-12 border-emerald-200 shadow-lg">
+        <Card className="mb-12 border-border shadow-lg">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-emerald-800 mb-4">Ár Misean / Our Mission</CardTitle>
+            <CardTitle className="text-2xl text-primary mb-4">Ár Misean / Our Mission</CardTitle>
           </CardHeader>
           <CardContent className="text-center">
             <p className="text-lg text-gray-700 mb-4">"Ag obair le chéile chun ár scoil a fheabhsú do gach duine"</p>
-            <p className="text-lg text-emerald-600">"Working together to improve our school for everyone"</p>
+            <p className="text-lg text-primary/80">"Working together to improve our school for everyone"</p>
           </CardContent>
         </Card>
 
         {/* Council Members */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-emerald-800 text-center mb-8">Baill na Comhairle / Council Members</h2>
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">Baill na Comhairle / Council Members</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {councilMembers.map((member, index) => (
-              <Card key={index} className="text-center border-emerald-200 hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center border-border hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <img
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
                     className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
                   />
-                  <CardTitle className="text-emerald-800 text-lg">{member.name}</CardTitle>
-                  <Badge className="bg-emerald-100 text-emerald-800 mx-auto">{member.class}</Badge>
+                  <CardTitle className="text-primary text-lg">{member.name}</CardTitle>
+                  <Badge className="bg-muted text-primary mx-auto">{member.class}</Badge>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-emerald-600 font-medium">{member.role}</p>
+                  <p className="text-primary/80 font-medium">{member.role}</p>
                 </CardContent>
               </Card>
             ))}
@@ -105,21 +107,21 @@ export default function SchoolCouncilPage() {
 
         {/* Current Initiatives */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-emerald-800 text-center mb-8">
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">
             Tionscnaimh Reatha / Current Initiatives
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {initiatives.map((initiative, index) => (
-              <Card key={index} className="border-emerald-200 hover:shadow-lg transition-shadow">
+              <Card key={index} className="border-border hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="text-4xl mb-4 text-center">{initiative.icon}</div>
-                  <CardTitle className="text-emerald-800 text-center">{initiative.title}</CardTitle>
-                  <p className="text-emerald-600 text-center font-medium">{initiative.titleEn}</p>
+                  <CardTitle className="text-primary text-center">{initiative.title}</CardTitle>
+                  <p className="text-primary/80 text-center font-medium">{initiative.titleEn}</p>
                 </CardHeader>
                 <CardContent className="text-center">
                   <p className="text-gray-600 mb-2">{initiative.description}</p>
                   <p className="text-gray-500 mb-4">{initiative.descriptionEn}</p>
-                  <Badge className="bg-emerald-100 text-emerald-800">{initiative.status}</Badge>
+                  <Badge className="bg-muted text-primary">{initiative.status}</Badge>
                 </CardContent>
               </Card>
             ))}
@@ -128,9 +130,9 @@ export default function SchoolCouncilPage() {
 
         {/* How to Get Involved */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <Card className="border-emerald-200">
+          <Card className="border-border">
             <CardHeader>
-              <CardTitle className="text-emerald-800 flex items-center">
+              <CardTitle className="text-primary flex items-center">
                 <MessageSquare className="w-6 h-6 mr-2" />
                 Conas Páirt a Ghlacadh / How to Get Involved
               </CardTitle>
@@ -145,9 +147,9 @@ export default function SchoolCouncilPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-emerald-200">
+          <Card className="border-border">
             <CardHeader>
-              <CardTitle className="text-emerald-800 flex items-center">
+              <CardTitle className="text-primary flex items-center">
                 <Calendar className="w-6 h-6 mr-2" />
                 Cruinnithe / Meetings
               </CardTitle>
@@ -156,15 +158,15 @@ export default function SchoolCouncilPage() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-700">Cruinniú Míosúil / Monthly Meeting</span>
-                  <Badge className="bg-emerald-100 text-emerald-800">Céadaoin 1ú / 1st Wednesday</Badge>
+                  <Badge className="bg-muted text-primary">Céadaoin 1ú / 1st Wednesday</Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-700">Am / Time</span>
-                  <span className="text-emerald-600">12:30 - 1:00pm</span>
+                  <span className="text-primary/80">12:30 - 1:00pm</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-700">Áit / Location</span>
-                  <span className="text-emerald-600">Seomra na Comhairle / Council Room</span>
+                  <span className="text-primary/80">Seomra na Comhairle / Council Room</span>
                 </div>
               </div>
             </CardContent>
@@ -172,9 +174,9 @@ export default function SchoolCouncilPage() {
         </div>
 
         {/* Contact Section */}
-        <Card className="border-emerald-200 text-center">
+        <Card className="border-border text-center">
           <CardHeader>
-            <CardTitle className="text-emerald-800">Déan Teagmháil / Get in Touch</CardTitle>
+            <CardTitle className="text-primary">Déan Teagmháil / Get in Touch</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 mb-4">
@@ -182,10 +184,10 @@ export default function SchoolCouncilPage() {
               us!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-6 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors">
+              <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
                 Seol Ríomhphost / Send Email
               </button>
-              <button className="px-6 py-2 border border-emerald-600 text-emerald-600 rounded-md hover:bg-emerald-50 transition-colors">
+              <button className="px-6 py-2 border border-primary text-primary rounded-md hover:bg-card transition-colors">
                 Bosca Moltaí / Suggestion Box
               </button>
             </div>

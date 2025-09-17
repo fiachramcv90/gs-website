@@ -28,14 +28,14 @@ const staffContacts = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
       <BilingualNav />
       
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-emerald-800 mb-4">Déan Teagmháil Linn / Contact Us</h1>
-          <p className="text-lg text-emerald-600 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold text-primary mb-4">Déan Teagmháil Linn / Contact Us</h1>
+          <p className="text-lg text-primary/80 max-w-3xl mx-auto">
             Táimid anseo chun cabhrú leat. Déan teagmháil linn ar bhealach ar bith is fearr leat. / We're here to help
             you. Contact us in whatever way works best for you.
           </p>
@@ -44,9 +44,9 @@ export default function ContactPage() {
         {/* Contact Form and Info */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Form */}
-          <Card className="border-emerald-200 shadow-lg">
+          <Card className="border-border shadow-lg">
             <CardHeader>
-              <CardTitle className="text-emerald-800 flex items-center">
+              <CardTitle className="text-primary flex items-center">
                 <MessageSquare className="w-6 h-6 mr-2" />
                 Seol Teachtaireacht / Send Message
               </CardTitle>
@@ -59,7 +59,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       required
-                      className="w-full px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="D'ainm iomlán / Your full name"
                     />
                   </div>
@@ -68,7 +68,7 @@ export default function ContactPage() {
                     <input
                       type="email"
                       required
-                      className="w-full px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="do.ríomhphost@sampla.ie"
                     />
                   </div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Uimhir Ghutháin / Phone Number</label>
                   <input
                     type="tel"
-                    className="w-full px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="028 9077 1234"
                   />
                 </div>
@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Ábhar / Subject *</label>
                   <select
                     required
-                    className="w-full px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="">Roghnaigh ábhar / Choose subject</option>
                     <option value="general">Fiosrúchán Ginearálta / General Inquiry</option>
@@ -103,14 +103,14 @@ export default function ContactPage() {
                   <textarea
                     required
                     rows={5}
-                    className="w-full px-3 py-2 border border-emerald-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Scríobh do theachtaireacht anseo... / Write your message here..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center px-6 py-3 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
+                  className="w-full flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
                 >
                   <Send className="w-5 h-5 mr-2" />
                   Seol Teachtaireacht / Send Message
@@ -121,9 +121,9 @@ export default function ContactPage() {
 
           {/* Contact Information */}
           <div className="space-y-6">
-            <Card className="border-emerald-200">
+            <Card className="border-border">
               <CardHeader>
-                <CardTitle className="text-emerald-800 flex items-center">
+                <CardTitle className="text-primary flex items-center">
                   <MapPin className="w-6 h-6 mr-2" />
                   Ár Seoladh / Our Address
                 </CardTitle>
@@ -139,7 +139,7 @@ export default function ContactPage() {
                     Tuaisceart Éireann / Northern Ireland
                   </p>
                   <div className="mt-4">
-                    <button className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-md hover:bg-emerald-200 transition-colors">
+                    <button className="px-4 py-2 bg-muted text-primary rounded-md hover:bg-card transition-colors">
                       Oscail i Google Maps / Open in Google Maps
                     </button>
                   </div>
@@ -147,9 +147,9 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-emerald-200">
+            <Card className="border-border">
               <CardHeader>
-                <CardTitle className="text-emerald-800 flex items-center">
+                <CardTitle className="text-primary flex items-center">
                   <Phone className="w-6 h-6 mr-2" />
                   Glaoigh Orainn / Call Us
                 </CardTitle>
@@ -157,14 +157,14 @@ export default function ContactPage() {
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-emerald-600" />
+                    <Phone className="w-5 h-5 text-primary/80" />
                     <div>
                       <p className="font-medium text-gray-800">028 9077 1234</p>
                       <p className="text-sm text-gray-500">Oifig Phríomhúil / Main Office</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-emerald-600" />
+                    <Mail className="w-5 h-5 text-primary/80" />
                     <div>
                       <p className="font-medium text-gray-800">info@gaelscoilnabhfal.ie</p>
                       <p className="text-sm text-gray-500">Ríomhphost Ginearálta / General Email</p>
@@ -174,9 +174,9 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-emerald-200">
+            <Card className="border-border">
               <CardHeader>
-                <CardTitle className="text-emerald-800 flex items-center">
+                <CardTitle className="text-primary flex items-center">
                   <Clock className="w-6 h-6 mr-2" />
                   Uaireanta Oscailte / Opening Hours
                 </CardTitle>
@@ -185,11 +185,11 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-700">Luan - Aoine / Mon - Fri</span>
-                    <span className="text-emerald-600 font-medium">8:30am - 4:00pm</span>
+                    <span className="text-primary/80 font-medium">8:30am - 4:00pm</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-700">Am Lóin / Lunch</span>
-                    <span className="text-emerald-600 font-medium">12:30pm - 1:30pm</span>
+                    <span className="text-primary/80 font-medium">12:30pm - 1:30pm</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-700">Satharn & Domhnach / Sat & Sun</span>
@@ -203,29 +203,29 @@ export default function ContactPage() {
 
         {/* Staff Directory */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-emerald-800 text-center mb-8">Foireann na Scoile / School Staff</h2>
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">Foireann na Scoile / School Staff</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {staffContacts.map((staff, index) => (
-              <Card key={index} className="border-emerald-200 hover:shadow-lg transition-shadow">
+              <Card key={index} className="border-border hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
                   <img
                     src={staff.image || "/placeholder.svg"}
                     alt={staff.name}
                     className="w-20 h-20 rounded-full mx-auto mb-3 object-cover"
                   />
-                  <CardTitle className="text-emerald-800 text-lg">{staff.name}</CardTitle>
-                  <p className="text-emerald-600 text-sm">{staff.role}</p>
+                  <CardTitle className="text-primary text-lg">{staff.name}</CardTitle>
+                  <p className="text-primary/80 text-sm">{staff.role}</p>
                 </CardHeader>
                 <CardContent className="text-center space-y-2">
                   <div className="flex items-center justify-center space-x-2 text-sm">
-                    <Mail className="w-4 h-4 text-emerald-600" />
-                    <a href={`mailto:${staff.email}`} className="text-emerald-600 hover:text-emerald-800 truncate">
+                    <Mail className="w-4 h-4 text-primary/80" />
+                    <a href={`mailto:${staff.email}`} className="text-primary/80 hover:text-primary truncate">
                       {staff.email}
                     </a>
                   </div>
                   <div className="flex items-center justify-center space-x-2 text-sm">
-                    <Phone className="w-4 h-4 text-emerald-600" />
-                    <a href={`tel:${staff.phone}`} className="text-emerald-600 hover:text-emerald-800">
+                    <Phone className="w-4 h-4 text-primary/80" />
+                    <a href={`tel:${staff.phone}`} className="text-primary/80 hover:text-primary">
                       {staff.phone}
                     </a>
                   </div>
@@ -236,9 +236,9 @@ export default function ContactPage() {
         </div>
 
         {/* FAQ Section */}
-        <Card className="border-emerald-200">
+        <Card className="border-border">
           <CardHeader>
-            <CardTitle className="text-emerald-800 text-center">
+            <CardTitle className="text-primary text-center">
               Ceisteanna Coitianta / Frequently Asked Questions
             </CardTitle>
           </CardHeader>
@@ -246,7 +246,7 @@ export default function ContactPage() {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-emerald-800 mb-2">
+                  <h4 className="font-semibold text-primary mb-2">
                     Conas is féidir liom mo pháiste a chlárú? / How can I register my child?
                   </h4>
                   <p className="text-gray-600 text-sm">
@@ -255,7 +255,7 @@ export default function ContactPage() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-emerald-800 mb-2">
+                  <h4 className="font-semibold text-primary mb-2">
                     Cad iad na huaireanta scoile? / What are the school hours?
                   </h4>
                   <p className="text-gray-600 text-sm">9:00am - 3:15pm, Luan go hAoine / Monday to Friday</p>
@@ -263,7 +263,7 @@ export default function ContactPage() {
               </div>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-emerald-800 mb-2">
+                  <h4 className="font-semibold text-primary mb-2">
                     An bhfuil seirbhís bus ann? / Is there a bus service?
                   </h4>
                   <p className="text-gray-600 text-sm">
@@ -271,7 +271,7 @@ export default function ContactPage() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-emerald-800 mb-2">
+                  <h4 className="font-semibold text-primary mb-2">
                     Cad faoi bhéilí scoile? / What about school meals?
                   </h4>
                   <p className="text-gray-600 text-sm">Tairgeann ár gcistineach béilí blasta agus folláine gach lá.</p>
