@@ -6,83 +6,16 @@ import { Separator } from "@/components/ui/separator"
 import { Users, Calendar, ExternalLink, AlertCircle, Globe } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { getClassBySlug, getAllClassSlugs } from "@/lib/class-data"
 
-const classData = {
-  nursery: {
-    irish: "Naí-Aonad",
-    english: "Nursery Unit",
-    ageRange: "3-4 years",
-    description:
-      "Our youngest learners begin their exciting journey with the Irish language through play-based learning and exploration.",
-    importantThings: [
-      "Bring a healthy snack and water bottle daily",
-      "School uniform required - green polo shirt and grey trousers/skirt",
-      "Collection time is 11:30am for morning session, 2:30pm for afternoon session",
-      "Please label all belongings clearly",
-    ],
-    termThemes: {
-      autumn: "Mé Féin agus Mo Theaghlach / Myself and My Family",
-      spring: "An Nádúr / Nature",
-      summer: "Ár bPobal / Our Community",
-    },
-    usefulWebsites: [
-      { name: "Bua na Cainte", url: "https://www.buanacainte.ie", description: "Irish language learning games" },
-      { name: "Cúla4", url: "https://www.cula4.com", description: "Irish language TV for children" },
-      { name: "Gaeilge i mo Phóca", url: "https://gaeilgeimophoca.ie", description: "Irish phrases and vocabulary" },
-    ],
-    staff: [
-      {
-        name: "Múinteoir Áine",
-        role: "Príomhmhúinteoir / Head Teacher",
-        qualifications: "B.Ed, Diploma in Irish Medium Education",
-      },
-      {
-        name: "Múinteoir Seán",
-        role: "Cúntóir Ranga / Classroom Assistant",
-        qualifications: "NNEB, Irish Language Certificate",
-      },
-    ],
-  },
-  "year-1": {
-    irish: "Rang 1",
-    english: "Year 1",
-    ageRange: "4-5 years",
-    description:
-      "Foundation year where children build confidence in Irish while developing essential literacy and numeracy skills.",
-    importantThings: [
-      "School starts at 9:00am, collection at 3:00pm",
-      "Reading books sent home weekly - please read with your child",
-      "PE kit needed on Tuesdays and Thursdays",
-      "Homework folder checked daily",
-    ],
-    termThemes: {
-      autumn: "Ag Tosú ar Scoil / Starting School",
-      spring: "Ainmhithe agus a nÁitreabh / Animals and Their Homes",
-      summer: "Ag Fás agus ag Athrú / Growing and Changing",
-    },
-    usefulWebsites: [
-      { name: "Phonics Play", url: "https://www.phonicsplay.co.uk", description: "Phonics games and activities" },
-      { name: "Mata Meabhrach", url: "https://www.matameabhrach.ie", description: "Mental maths in Irish" },
-      { name: "Scéalta", url: "https://www.scealta.ie", description: "Irish stories for children" },
-    ],
-    staff: [
-      {
-        name: "Múinteoir Máire",
-        role: "Múinteoir Ranga / Class Teacher",
-        qualifications: "B.Ed Primary, M.Ed Irish Medium Education",
-      },
-      {
-        name: "Múinteoir Pádraig",
-        role: "Múinteoir Tacaíochta / Support Teacher",
-        qualifications: "B.Ed, SEN Diploma",
-      },
-    ],
-  },
-  // Add more class data as needed...
+export async function generateStaticParams() {
+  return getAllClassSlugs().map((slug) => ({
+    slug: slug,
+  }))
 }
 
 export default function ClassPage({ params }: { params: { slug: string } }) {
-  const classInfo = classData[params.slug as keyof typeof classData]
+  const classInfo = getClassBySlug(params.slug)
 
   if (!classInfo) {
     notFound()
@@ -100,21 +33,20 @@ export default function ClassPage({ params }: { params: { slug: string } }) {
               Ár Ranganna / Our Classes
             </Link>
             <span>/</span>
-            <span>{classInfo.irish}</span>
+            <span>{classInfo.className}</span>
           </div>
           <h1 className="text-4xl font-bold text-primary mb-2">
-            {classInfo.irish} / {classInfo.english}
+            {classInfo.className} / {classInfo.english}
           </h1>
           <div className="flex items-center gap-4 mb-4">
             <Badge variant="secondary">{classInfo.ageRange}</Badge>
           </div>
-          <p className="text-lg text-muted-foreground max-w-3xl">{classInfo.description}</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Important Things */}
+            {/* Important Information */}
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
@@ -123,67 +55,90 @@ export default function ClassPage({ params }: { params: { slug: string } }) {
                 </div>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3">
-                  {classInfo.importantThings.map((item, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="space-y-6">
+                  {/* Irish Information */}
+                  <div>
+                    <h4 className="font-semibold text-green-700 mb-3">As Gaeilge:</h4>
+                    <ul className="space-y-2">
+                      {classInfo.importantInfo.irish.map((item, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-sm">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <Separator />
+                  
+                  {/* English Information */}
+                  <div>
+                    <h4 className="font-semibold text-blue-700 mb-3">In English:</h4>
+                    <ul className="space-y-2">
+                      {classInfo.importantInfo.english.map((item, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-sm">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
-            {/* Term Themes */}
+            {/* Term Topics */}
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Calendar className="h-5 w-5 text-primary" />
-                  <CardTitle>Téamaí na dTéarmaí / Term Themes</CardTitle>
+                  <CardTitle>Téamaí na dTéarmaí / Term Topics</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-orange-600 mb-2">Fómhar / Autumn Term</h4>
-                  <p className="text-sm text-muted-foreground">{classInfo.termThemes.autumn}</p>
-                </div>
-                <Separator />
-                <div>
-                  <h4 className="font-semibold text-green-600 mb-2">Earrach / Spring Term</h4>
-                  <p className="text-sm text-muted-foreground">{classInfo.termThemes.spring}</p>
-                </div>
-                <Separator />
-                <div>
-                  <h4 className="font-semibold text-blue-600 mb-2">Samhradh / Summer Term</h4>
-                  <p className="text-sm text-muted-foreground">{classInfo.termThemes.summer}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Useful Websites */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <Globe className="h-5 w-5 text-primary" />
-                  <CardTitle>Suíomhanna Úsáideacha / Useful Websites</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {classInfo.usefulWebsites.map((website, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                    <div>
-                      <h4 className="font-medium">{website.name}</h4>
-                      <p className="text-sm text-muted-foreground">{website.description}</p>
+                {classInfo.terms.map((termInfo, index) => (
+                  <div key={index}>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-primary">Téarma {termInfo.term} / Term {termInfo.term}</h4>
                     </div>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={website.url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4" />
-                      </Link>
-                    </Button>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="font-medium text-green-700">{termInfo.topic.irish}</p>
+                      <p className="text-sm text-blue-600">{termInfo.topic.english}</p>
+                    </div>
+                    {index < classInfo.terms.length - 1 && <Separator className="mt-4" />}
                   </div>
                 ))}
               </CardContent>
             </Card>
+
+            {/* Useful Websites */}
+            {classInfo.websites.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-primary" />
+                    <CardTitle>Suíomhanna Úsáideacha / Useful Websites</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {classInfo.websites.map((website, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                      <div className="flex-1">
+                        <h4 className="font-medium">{website.name}</h4>
+                        {website.description && (
+                          <p className="text-sm text-muted-foreground mt-1">{website.description}</p>
+                        )}
+                      </div>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={website.url} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -197,14 +152,29 @@ export default function ClassPage({ params }: { params: { slug: string } }) {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {classInfo.staff.map((member, index) => (
-                  <div key={index} className="space-y-2">
-                    <h4 className="font-medium">{member.name}</h4>
-                    <p className="text-sm text-muted-foreground">{member.role}</p>
-                    <p className="text-xs text-muted-foreground">{member.qualifications}</p>
-                    {index < classInfo.staff.length - 1 && <Separator />}
-                  </div>
-                ))}
+                {/* Teacher(s) */}
+                <div className="space-y-2">
+                  <h4 className="font-medium text-green-700">Múinteoir(í) / Teacher(s):</h4>
+                  {classInfo.teacher && (
+                    <p className="text-sm font-medium">{classInfo.teacher}</p>
+                  )}
+                  {classInfo.teachers && classInfo.teachers.map((teacher, index) => (
+                    <p key={index} className="text-sm font-medium">{teacher}</p>
+                  ))}
+                </div>
+                
+                {/* Assistants */}
+                {classInfo.assistants && classInfo.assistants.length > 0 && (
+                  <>
+                    <Separator />
+                    <div className="space-y-2">
+                      <h4 className="font-medium text-blue-700">Cúntóir(í) / Classroom Assistant(s):</h4>
+                      {classInfo.assistants.map((assistant, index) => (
+                        <p key={index} className="text-sm font-medium">{assistant}</p>
+                      ))}
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
 
