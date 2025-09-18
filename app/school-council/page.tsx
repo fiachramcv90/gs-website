@@ -2,31 +2,32 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageSquare, Calendar } from "lucide-react"
 import { BilingualNav } from "@/components/bilingual-nav"
+import Image from "next/image"
 
 const councilMembers = [
   {
     name: "Aoife Ní Mhurchú",
     role: "Cathaoirleach / Chairperson",
     class: "Rang 6",
-    image: "/irish-school-girl-student-council-member.jpg",
+    image: "/images/staff/student-council-chairperson.svg",
   },
   {
     name: "Cian Ó Briain",
     role: "Leas-Chathaoirleach / Vice-Chairperson",
     class: "Rang 6",
-    image: "/irish-school-boy-student-council-member.jpg",
+    image: "/images/staff/student-council-vice-chair.svg",
   },
   {
     name: "Síle Ní Dhomhnaill",
     role: "Rúnaí / Secretary",
     class: "Rang 5",
-    image: "/irish-school-girl-student-council-secretary.jpg",
+    image: "/images/staff/student-council-secretary.svg",
   },
   {
     name: "Tadhg Mac Gearailt",
     role: "Cisteoir / Treasurer",
     class: "Rang 5",
-    image: "/irish-school-boy-student-council-treasurer.jpg",
+    image: "/images/staff/student-council-treasurer.svg",
   },
 ]
 
@@ -89,9 +90,11 @@ export default function SchoolCouncilPage() {
             {councilMembers.map((member, index) => (
               <Card key={index} className="text-center border-border hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <img
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
+                  <Image
+                    src={member.image || "/images/staff/student-council-chairperson.svg"}
+                    alt={`${member.name} - ${member.role}`}
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
                   />
                   <CardTitle className="text-primary text-lg">{member.name}</CardTitle>

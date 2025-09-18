@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const newsArticles = [
   {
@@ -15,7 +16,7 @@ const newsArticles = [
     author: "Múinteoir Ní Dhomhnaill",
     category: "Cultúr",
     categoryEn: "Culture",
-    image: "/irish-children-celebrating-irish-language-week.jpg",
+    image: "/images/events/irish-language-week-celebration.svg",
   },
   {
     id: 2,
@@ -27,7 +28,7 @@ const newsArticles = [
     author: "Múinteoir Ó Súilleabháin",
     category: "Spórt",
     categoryEn: "Sports",
-    image: "/irish-school-children-playing-football.jpg",
+    image: "/images/events/school-sports-football.svg",
   },
   {
     id: 3,
@@ -39,7 +40,7 @@ const newsArticles = [
     author: "Múinteoir Mac Gearailt",
     category: "Eolaíocht",
     categoryEn: "Science",
-    image: "/irish-school-children-doing-science-experiments.jpg",
+    image: "/images/events/science-experiments-stem.svg",
   },
 ]
 
@@ -63,9 +64,11 @@ export default function NewsPage() {
           <Card className="overflow-hidden border-border shadow-lg">
             <div className="md:flex">
               <div className="md:w-1/2">
-                <img
-                  src={newsArticles[0].image || "/placeholder.svg"}
-                  alt={newsArticles[0].title}
+                <Image
+                  src={newsArticles[0].image || "/images/events/irish-language-week-celebration.svg"}
+                  alt={`${newsArticles[0].title} / ${newsArticles[0].titleEn}`}
+                  width={600}
+                  height={300}
                   className="w-full h-64 md:h-full object-cover"
                 />
               </div>
@@ -101,7 +104,13 @@ export default function NewsPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {newsArticles.slice(1).map((article) => (
             <Card key={article.id} className="overflow-hidden border-border hover:shadow-lg transition-shadow">
-              <img src={article.image || "/placeholder.svg"} alt={article.title} className="w-full h-48 object-cover" />
+              <Image 
+                src={article.image || "/images/events/irish-language-week-celebration.svg"} 
+                alt={`${article.title} / ${article.titleEn}`} 
+                width={600} 
+                height={300} 
+                className="w-full h-48 object-cover" 
+              />
               <CardHeader>
                 <Badge className="bg-muted text-primary w-fit mb-2">
                   {article.category} / {article.categoryEn}
