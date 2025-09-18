@@ -1,6 +1,7 @@
 import { BilingualNav } from "@/components/bilingual-nav"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Phone, Mail, MapPin, Clock, Send, MessageSquare } from "lucide-react"
+import Image from "next/image"
 
 const staffContacts = [
   {
@@ -8,21 +9,21 @@ const staffContacts = [
     role: "Príomhoide / Principal",
     email: "principal@gaelscoilnabhfal.ie",
     phone: "028 9077 1234",
-    image: "/placeholder.svg?key=staff1",
+    image: "/images/staff/principal-placeholder.svg",
   },
   {
     name: "Sean",
     role: "Leas-Phríomhoide / Vice Principal",
     email: "vicepricipal@gaelscoilnabhfal.ie",
     phone: "028 9077 1235",
-    image: "/placeholder.svg?key=staff2",
+    image: "/images/staff/vice-principal-placeholder.svg",
   },
   {
     name: "Anna",
     role: "Rúnaí / Secretary",
     email: "runai@gaelscoilnabhfal.ie",
     phone: "028 9077 1236",
-    image: "/placeholder.svg?key=staff3",
+    image: "/images/staff/secretary-placeholder.svg",
   }
 ]
 
@@ -208,9 +209,11 @@ export default function ContactPage() {
             {staffContacts.map((staff, index) => (
               <Card key={index} className="border-border hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <img
-                    src={staff.image || "/placeholder.svg"}
-                    alt={staff.name}
+                  <Image
+                    src={staff.image || "/images/staff/principal-placeholder.svg"}
+                    alt={`${staff.name} - ${staff.role}`}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-full mx-auto mb-3 object-cover"
                   />
                   <CardTitle className="text-primary text-lg">{staff.name}</CardTitle>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, Users, BookOpen, Award, Heart, Globe } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function HomePage() {
   return (
@@ -35,10 +36,13 @@ export default function HomePage() {
         {/* Hero Image Placeholder */}
         <div className="mt-16 max-w-5xl mx-auto px-4">
           <div className="relative rounded-lg overflow-hidden shadow-2xl">
-            <img
-              src="/irish-school-children-learning-in-classroom-with-i.jpg"
-              alt="Students learning at Gaelscoil na bhFál"
+            <Image
+              src="/images/school-photos/hero-school-children-learning.svg"
+              alt="Páistí ag foghlaim ag Gaelscoil na bhFál / Students learning at Gaelscoil na bhFál"
+              width={800}
+              height={400}
               className="w-full h-[400px] object-cover"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
