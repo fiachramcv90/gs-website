@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -151,8 +152,16 @@ export function BilingualNav() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
-                <span className="text-secondary-foreground font-bold text-lg">G</span>
+              <div className="w-10 h-10 relative">
+                <Image
+                  src="/images/logos/logo-nav.png"
+                  alt="Suaitheántas Gaelscoil na bhFál / Gaelscoil na bhFál Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                  priority
+                  sizes="40px"
+                />
               </div>
               <div className="hidden sm:block">
                 <div className="text-sm font-semibold">Gaelscoil na bhFál</div>
