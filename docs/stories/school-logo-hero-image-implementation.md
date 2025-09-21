@@ -133,4 +133,106 @@
 
 ---
 
-**Ready for agent assignment and execution.**
+## UX Expert Review - Implementation Quality Issues
+
+**Reviewed by**: UX Expert (Sally)  
+**Review Date**: 2025-09-21  
+**Status**: 🚨 **REQUIRES REWORK** - Significant quality issues identified
+
+### 🚨 **Critical Quality Issues Found:**
+
+#### **1. Logo Implementation - POOR QUALITY**
+- **Severe Pixelation**: The 40x40px logo is extremely low resolution and pixelated
+- **Unprofessional Appearance**: Current logo looks blurry and unprofessional in navigation
+- **Poor Scaling Method**: Original logo was heavily downsampled, losing all detail and clarity
+- **Technical Issues**: 
+  - Using both `w-10 h-10` AND `width={40} height={40}` is redundant
+  - `object-cover` with `rounded-full` on square logo may cause distortion
+  - No proper retina display handling implemented
+
+#### **2. Hero Image Implementation - COMPOSITION PROBLEMS**
+- **Poor Cropping**: The 800x400px crop doesn't follow UX specifications properly
+- **Loss of Visual Focus**: Composition doesn't emphasize the intended 60/40 playground/building balance
+- **Aspect Ratio Distortion**: Aggressive cropping may have distorted original proportions
+- **Missing Visual Hierarchy**: Current crop doesn't create the intended visual flow
+
+#### **3. Overall Professional Standards - NOT MET**
+- **Brand Representation**: Current implementation doesn't represent the school professionally
+- **User Experience Impact**: Poor image quality negatively affects user perception
+- **Design System Consistency**: Implementation doesn't maintain design system standards
+
+### 🔧 **Required Fixes - MUST BE ADDRESSED:**
+
+#### **Logo Fixes (CRITICAL):**
+1. **Use Higher Resolution Source**: Start with at least 200x200px before scaling to 40x40px
+2. **Proper PNG Optimization**: Ensure crisp edges and proper transparency handling
+3. **Implement Retina Support**: Use proper srcSet for high-DPI displays (40x40 + 80x80)
+4. **Clean CSS Implementation**: Remove redundant sizing declarations
+5. **Anti-aliasing**: Ensure smooth edges at small sizes
+
+#### **Hero Image Fixes (HIGH PRIORITY):**
+1. **Re-crop with Precision**: Follow original UX specifications exactly
+   - Left 60%: Active playground scene with children
+   - Right 40%: School building and background
+   - Maintain natural proportions
+2. **Improve Composition**: Ensure visual balance between playground activity and school building
+3. **Quality Check**: Use less aggressive compression to maintain image clarity
+4. **Responsive Verification**: Test across all viewport sizes
+
+#### **Technical Implementation Fixes:**
+1. **Proper Next.js Image Optimization**: Implement correct responsive image patterns
+2. **CSS Cleanup**: Remove conflicting or redundant styles
+3. **Performance Optimization**: Ensure proper lazy loading and optimization
+4. **Accessibility Verification**: Confirm alt text renders correctly across screen readers
+
+### 📋 **Re-implementation Requirements:**
+
+#### **New Logo Specifications:**
+```css
+/* Corrected Implementation */
+.logo-container {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+/* Use Next.js Image with proper srcSet */
+<Image
+  src="/images/logos/logo-40x40.png"
+  srcSet="/images/logos/logo-40x40.png 1x, /images/logos/logo-80x80.png 2x"
+  alt="Suaitheántas Gaelscoil na bhFál / Gaelscoil na bhFál Logo"
+  width={40}
+  height={40}
+  className="rounded-full"
+  priority
+/>
+```
+
+#### **New Hero Image Specifications:**
+- **Re-process P-230.jpg** with careful attention to composition
+- **Crop Coordinates**: Focus on left-center playground area while maintaining building visibility
+- **Quality Settings**: Use 90% JPEG quality instead of aggressive compression
+- **Dimensions**: Maintain exact 800x400px with proper aspect ratio preservation
+
+### 🎯 **Acceptance Criteria - UPDATED:**
+
+The following acceptance criteria are **NOT MET** and require re-implementation:
+
+- ❌ **AC1**: Logo replacement - Current implementation is poor quality and unprofessional
+- ❌ **AC2**: Hero banner replacement - Composition doesn't follow specifications
+- ❌ **AC3**: Proper optimization - Images are over-compressed and poorly processed
+- ❌ **AC7**: Professional appearance - Current implementation looks unprofessional
+
+### 📝 **Developer Action Required:**
+
+1. **IMMEDIATE**: Stop current implementation branch
+2. **RE-PROCESS**: Create new high-quality logo and hero images following updated specifications
+3. **RE-IMPLEMENT**: Update code with proper Next.js Image patterns
+4. **VERIFY**: Test on multiple devices and screen densities before review
+5. **QA CHECK**: Ensure professional visual quality before submission
+
+**This implementation cannot proceed to production in its current state.**
+
+---
+
+**Status Updated**: Returned to Developer for quality improvements

@@ -11,45 +11,120 @@ This document provides detailed specifications for optimizing and preparing imag
 
 ---
 
-## 📷 **LOGO SPECIFICATIONS**
+## 📷 **LOGO SPECIFICATIONS - UPDATED FOR QUALITY**
 
 ### **Source File**: `Final-Gaelscoil-Na-Bhfal-Logo.jpg`
 
-#### **Navigation Logo (Primary Implementation)**
-- **Target Dimensions**: 40px × 40px
-- **Format**: PNG with transparent background preferred
-- **Quality**: High-resolution for retina displays (80px × 80px source, scaled down)
-- **Compression**: Optimized for web (<10KB target)
+#### **⚠️ CRITICAL: PNG Conversion for Seamless Integration**
 
-#### **Technical Requirements**:
-```css
-/* Target CSS Application */
-.navigation-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Maintains circular design */
-  object-fit: cover;
-}
+**Why PNG with Transparency is Essential:**
+- **Seamless Navigation Integration**: Transparent background allows logo to blend naturally with any nav background color
+- **Professional Appearance**: Eliminates harsh white/colored edges that clash with design
+- **Future-Proof Design**: Works with dark/light themes and design changes
+- **Higher Quality**: PNG preserves crisp edges better than JPEG at small sizes
+
+#### **Navigation Logo (Primary Implementation) - ENHANCED SPECS**
+
+**Format Requirements:**
+- **Format**: PNG-24 with full alpha transparency (REQUIRED)
+- **Target Dimensions**: 40px × 40px (standard) + 80px × 80px (retina)
+- **Source Resolution**: Start with minimum 200px × 200px before scaling
+- **Compression**: PNG optimization with transparency preservation (<8KB target)
+- **Color Profile**: sRGB for web consistency
+
+#### **Advanced Processing Steps**:
+```
+Step 1: Background Removal
+- Remove white background completely
+- Ensure clean alpha channel (no gray/white fringing)
+- Use layer masking for precise edge control
+
+Step 2: High-Quality Scaling
+- Start with 200px+ source resolution
+- Use bicubic/lanczos resampling for downscaling
+- Apply unsharp mask after scaling for crisp edges
+
+Step 3: Edge Refinement
+- Apply anti-aliasing for smooth circular edges
+- Ensure sub-pixel precision on curves
+- Test at actual size (40px) for clarity verification
+
+Step 4: Optimization
+- Optimize PNG for web (use tools like ImageOptim/TinyPNG)
+- Preserve alpha channel quality
+- Target <8KB file size without quality loss
 ```
 
-#### **Design Specifications**:
-- **Crop Focus**: Center the circular logo design
-- **Background**: Remove white background, make transparent
-- **Color Preservation**: Maintain the green color scheme (#22c55e approximate)
-- **Contrast**: Ensure logo remains legible on primary background color
-- **Edge Treatment**: Smooth anti-aliasing for crisp circular edges
+#### **Technical Requirements - CORRECTED**:
+```css
+/* CORRECTED Implementation - Remove Redundant Styles */
+.logo-container {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
 
-#### **Output Files Needed**:
-1. `logo-40x40.png` (Standard resolution)
-2. `logo-40x40@2x.png` (Retina resolution - 80x80px)
+/* Next.js Image with Proper Responsive Support */
+<Image
+  src="/images/logos/logo-nav.png"
+  srcSet="/images/logos/logo-nav.png 1x, /images/logos/logo-nav@2x.png 2x"
+  alt="Suaitheántas Gaelscoil na bhFál / Gaelscoil na bhFál Logo"
+  width={40}
+  height={40}
+  className="rounded-full" /* Only needed style - transparency handles the rest */
+  priority
+/>
+```
+
+#### **Design Specifications - ENHANCED**:
+- **Background Treatment**: 
+  - 100% transparent background (alpha = 0)
+  - No white/colored fringing around edges
+  - Clean alpha channel with proper anti-aliasing
+- **Circular Design Preservation**: 
+  - Maintain perfect circular logo integrity
+  - Center the logo design within the circular bounds
+  - Ensure no clipping of important logo elements
+- **Color Accuracy**: 
+  - Preserve exact green color values from original (#1a5f3f observed from source)
+  - Maintain color saturation and contrast
+  - Ensure legibility on both light and dark backgrounds
+- **Edge Quality**: 
+  - Smooth anti-aliased edges
+  - No pixelation or jagged lines
+  - Crisp definition at 40px viewing size
+
+#### **Quality Validation Checklist**:
+- [ ] Background is 100% transparent (no white edges)
+- [ ] Logo remains crisp and clear at 40px size
+- [ ] Circular design is perfectly centered
+- [ ] Colors match original brand colors exactly
+- [ ] File size under 8KB for standard version
+- [ ] Retina version (80px) scales properly
+- [ ] Alpha channel is clean with proper anti-aliasing
+- [ ] Logo looks professional on different colored backgrounds
+
+#### **Output Files Needed - UPDATED**:
+1. `logo-nav.png` (40×40px, optimized PNG-24 with transparency)
+2. `logo-nav@2x.png` (80×80px, retina version with transparency)
+3. `logo-nav-original.png` (200×200px, high-res backup with transparency)
+
+#### **Testing Requirements**:
+- Test logo appearance on:
+  - Light backgrounds (white, light gray)
+  - Dark backgrounds (navy, dark gray) 
+  - Colored backgrounds (primary green theme)
+  - Mobile devices (actual 40px rendering)
+  - Retina displays (verify @2x version loads)
 
 ---
 
-## 🏞️ **HERO BANNER SPECIFICATIONS**
+## 🏞️ **HERO BANNER SPECIFICATIONS - ENHANCED QUALITY**
 
 ### **Target Dimensions**: 800px × 400px (2:1 aspect ratio)
-### **Responsive Requirements**: Must work at various viewport sizes
-### **Format**: WebP with JPG fallback
+### **Responsive Requirements**: Must work at various viewport sizes (320px to 1200px+)
+### **Format**: High-quality JPEG with WebP optimization (PNG transparency not needed)
+### **Quality Standards**: Professional photography quality, not web-compressed
 
 ---
 
@@ -76,11 +151,14 @@ Target Composition:
 └── Bottom 80%: Ground level activity
 ```
 
-### **Post-Processing Requirements**:
-- **Brightness**: Slight increase (+10-15%) for web optimized viewing
-- **Contrast**: Enhance slightly to improve text overlay readability
-- **Saturation**: Maintain natural tones, slight boost to green elements
-- **Gradient Overlay**: Optional dark gradient from top-to-bottom (20% opacity) for text readability
+### **Post-Processing Requirements - ENHANCED**:
+- **Quality Setting**: Use 90-95% JPEG quality (NOT aggressive compression)
+- **Brightness**: Slight increase (+5-10%) for web optimization without overexposure
+- **Contrast**: Enhance slightly (+10%) to improve text overlay readability
+- **Saturation**: Maintain natural school colors, slight boost to green playground elements
+- **Sharpening**: Apply subtle unsharp mask after resizing for crisp details
+- **Color Balance**: Ensure natural skin tones and realistic playground colors
+- **Gradient Overlay**: CSS-based gradient overlay (not baked into image) for text readability
 
 ### **Alt Text Specification**:
 ```
@@ -254,4 +332,54 @@ public/images/
 
 ---
 
-**Ready for Developer Implementation** ✅
+## 🎯 **KEY UPDATES - PNG TRANSPARENCY IMPLEMENTATION**
+
+### **Major Improvements for Logo:**
+
+#### **✅ Why PNG with Transparency is Critical:**
+1. **Seamless Integration**: Logo blends naturally with navigation background
+2. **Professional Quality**: Eliminates unsightly white edges and harsh boundaries  
+3. **Design Flexibility**: Works with any background color or future theme changes
+4. **Brand Consistency**: Maintains logo integrity across different contexts
+5. **Technical Excellence**: Proper alpha channel handling for crisp edges
+
+#### **🔧 Implementation Benefits:**
+- **Navigation Bar**: Logo appears to "float" naturally within the nav design
+- **Responsive Design**: Looks professional across all device sizes and orientations
+- **Future-Proofing**: Compatible with dark mode, theme changes, or design updates
+- **Performance**: Smaller file sizes with better quality than equivalent JPEG
+
+#### **🎨 Visual Quality Standards:**
+- **No Background Artifacts**: Complete transparency with clean edges
+- **Crisp Circular Design**: Perfect circular logo maintains brand identity
+- **Color Accuracy**: Exact brand colors preserved from original
+- **Multi-Context Testing**: Verified appearance on light, dark, and colored backgrounds
+
+### **Developer Implementation Notes:**
+
+#### **Required File Structure:**
+```
+public/images/logos/
+├── logo-nav.png          (40×40px, standard resolution)
+├── logo-nav@2x.png       (80×80px, retina resolution)  
+└── logo-nav-original.png (200×200px, backup/source)
+```
+
+#### **Next.js Implementation:**
+```jsx
+<Image
+  src="/images/logos/logo-nav.png"
+  srcSet="/images/logos/logo-nav.png 1x, /images/logos/logo-nav@2x.png 2x"
+  alt="Suaitheántas Gaelscoil na bhFál / Gaelscoil na bhFál Logo"
+  width={40}
+  height={40}
+  className="rounded-full"
+  priority
+/>
+```
+
+**Quality Standards**: This implementation must meet professional web design standards suitable for a school's official website representation.
+
+---
+
+**Status**: ✅ **Enhanced Specifications Ready for High-Quality Implementation**

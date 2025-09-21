@@ -154,12 +154,13 @@ export function BilingualNav() {
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-10 h-10 relative">
                 <Image
-                  src="/images/logos/logo-40x40.png"
+                  src="/images/logos/logo-nav.png"
                   alt="Suaitheántas Gaelscoil na bhFál / Gaelscoil na bhFál Logo"
                   width={40}
                   height={40}
-                  className="w-10 h-10 object-cover rounded-full"
+                  className="rounded-full"
                   priority
+                  sizes="40px"
                 />
               </div>
               <div className="hidden sm:block">
