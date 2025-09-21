@@ -37,8 +37,8 @@ export default function HomePage() {
         <div className="mt-16 max-w-5xl mx-auto px-4">
           <div className="relative rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/images/school-photos/hero-school-children-learning.svg"
-              alt="Páistí ag foghlaim ag Gaelscoil na bhFál / Students learning at Gaelscoil na bhFál"
+              src="/images/hero/hero-playground.jpg"
+              alt="Páistí ag súgradh i gclós na scoile ag Gaelscoil na bhFál / Children playing in the school playground at Gaelscoil na bhFál"
               width={800}
               height={400}
               className="w-full h-[400px] object-cover"
